@@ -1,0 +1,5 @@
+Scriptname {{project_shortname}}{{papyrus_namespace_separator}}UpdateQuest{{papyrus_namespace_separator}}PlayerAliasScript extends ReferenceAlias
+
+Event OnPlayerLoadGame()
+    (GetOwningQuest() as {{project_shortname}}{{papyrus_namespace_separator}}UpdateQuest{{papyrus_namespace_separator}}UpdateQuestScript).Update()
+EndEvent

@@ -1,0 +1,16 @@
+<?xml version='1.0'?>
+ <PapyrusProject xmlns="PapyrusProject.xsd"
+   Flags="{{game_path}}\Data\{{papyrus_base_source_path}}\{{papyrus_flag_name}}"
+   Output=".\Data\Scripts"
+   {%- if game == "Skyrim" %}
+   Game="sse" 
+   {%- endif %}
+ >
+   <Imports>
+     <Import>{{game_path}}\Data\{{papyrus_base_source_path}}</Import>
+     <Import>.\Data\{{papyrus_user_source_path}}</Import>
+   </Imports>
+   <Folders>
+     <Folder>.\Data\{{papyrus_user_source_path}}</Folder>
+   </Folders>
+ </PapyrusProject>

@@ -1,0 +1,248 @@
+# Questions
+project_name:
+    type: str
+    help: What is the mod name?
+
+project_shortname:
+    type: str
+    help: What is the mod shortname (must be exactly 3 characters)?
+    validator: >-
+      {% if project_shortname|length != 3 %}
+      Project ID must be exactly 3 characters.
+      {% endif %}
+
+game:
+    type: str
+    help: Which game are you modding?
+    choices:
+      - Starfield
+      - Fallout4
+      - Skyrim
+
+game_path:
+    type: str
+    help: What is the path of that game?
+
+my_games_path:
+    type: str
+    help: What is the path of the "My Games" folder?
+
+notebook_path:
+    type: str
+    help: What is the path of the notebook holding project design infos?
+
+voices:
+  type: bool
+  help: Will the mod contain voices?
+
+ai_voices:
+  type: bool
+  when: "{{ voices }}"
+  help: Will the mod contain AI voices?
+
+fomod:
+  type: bool
+  help: Will the mod contain FOMOD files?
+
+gpt:
+  type: bool
+  help: Has GPT been used?
+
+# Project init
+papyrus_flag_name:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Starfield" -%}
+    Starfield_Papyrus_Flags.flg
+    {%- elif game == "Fallout4" -%}
+    Institute_Papyrus_Flags.flg
+    {%- else -%}
+    TESV_Papyrus_Flags.flg
+    {%- endif -%}
+
+papyrus_base_source_path:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Starfield" -%}
+    Scripts/Source
+    {%- elif game == "Fallout4" -%}
+    Scripts/Source/Base
+    {%- else -%}
+    Source/Scripts
+    {%- endif -%}
+
+papyrus_user_source_path:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Starfield" -%}
+    Scripts/Source
+    {%- elif game == "Fallout4" -%}
+    Scripts/Source/User
+    {%- else -%}
+    Source/Scripts
+    {%- endif -%}
+
+compiler_path:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Starfield" -%}
+    Tools/Papyrus Compiler
+    {%- else -%}
+    Papyrus Compiler
+    {%- endif -%}
+
+debug_compile_args:
+  type: str
+  when: false
+  default: |-
+    {%- if game == "Skyrim" -%}
+    "Data\\Source\\Scripts",
+    "-i=Data\\Source\\Scripts;{{game_path}}/Data/Source/Scripts",
+    "-o=Data\\Scripts",
+    "-f=TESV_Papyrus_Flags.flg",
+    "-all"
+    {%- else -%}
+    "{{project_name}}Debug.ppj"
+    {%- endif -%}
+
+papyrus_namespace_separator:
+  type: str
+  when: false
+  default: "{{ '_' if game == 'Skyrim' else ':' }}"
+
+achlist_namespace_separator:
+  type: str
+  when: false
+  default: "{{ '_' if game == 'Skyrim' else '\\\\\\\\' }}"
+
+release_compile_args:
+  type: str
+  when: false
+  default: |-
+    {%- if game == "Skyrim" -%}
+    "Data\\Source\\Scripts",
+    "-i=Data\\Source\\Scripts;{{game_path}}/Data/Source/Scripts",
+    "-o=Data\\Scripts",
+    "-f=TESV_Papyrus_Flags.flg",
+    "-all",
+    "-optimize"
+    {%- else -%}
+    "{{project_name}}Release.ppj"
+    {%- endif -%}
+
+my_games_subfolder:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Starfield" -%}
+    Starfield
+    {%- elif game == "Fallout4" -%}
+    Fallout4
+    {%- else -%}
+    Skyrim Special Edition
+    {%- endif -%}
+
+papyrus_extension_settings:
+  type: str
+  when: false
+  default: |-
+    {%- if game == "Starfield" -%}
+    "papyrus.version": "starfield",
+            "papyrus.fallout4.enabled": false,
+            "papyrus.skyrimSpecialEdition.enabled": false,
+            "papyrus.skyrim.enabled": false
+    {%- elif game == "Fallout4" -%}
+    "papyrus.fallout4.enabled": true,            
+            "papyrus.fallout4.installPath": "{{game_path}}",
+            "papyrus.skyrimSpecialEdition.enabled": false,
+            "papyrus.skyrim.enabled": false
+    {%- else -%}
+    "papyrus.fallout4.enabled": false,
+            "papyrus.skyrimSpecialEdition.enabled": true,
+            "papyrus.skyrimSpecialEdition.installPath": "{{game_path}}",
+            "papyrus.skyrim.enabled": false
+    {%- endif -%}
+
+unwanted_vscode_extension:
+  type: str
+  when: false
+  default: |-
+      {%- if game == "Starfield" -%}
+      "unwantedRecommendations": 
+          [
+            "joelday.papyrus-lang-vscode",
+            'MrTrilB.papyrus-tools'
+          ]
+      {%- else -%}
+      "unwantedRecommendations": 
+          [
+            "joelday.papyrus-lang-vscode",
+            "zenimax.vscodepapyrus"
+          ]
+      {%- endif -%}
+
+archive_extension:
+  type: str
+  when: false
+  default: >-
+      {%- if game == "Skyrim" -%}
+      bsa
+      {%- else -%}
+      ba2
+      {%- endif -%}
+
+# Readme
+ai_voices_manual_install:
+  type: str
+  when: false
+  default: >-
+    Delete the *{{project_name}} - Voice_en_NO_AI.ba2* file, or replace the regular file by removing *NO_AI* from the filename, depending on whether or not you want the spliced/AI-generated voices.
+
+starfield_other_mods:
+  type: str
+  when: false
+  default: |-
+    - [Roleplayers' Alternate Start](https://www.nexusmods.com/starfield/mods/15094) : An alternate start mod designed for roleplayers, fully dynamic and customizable, with many ways to trigger the main quest and a lot of starting options (including pedestrian and shipwrecked starts).
+    - [Astra Economy - Legendary Trading and Rerolling](https://www.nexusmods.com/starfield/mods/11256) : Turns Stache at the Trackers Alliance HQ into a proper vendor, allowing you to sell legendary equipment and buy X-Tech using Astras as the currency.
+
+starfield_credits:
+  type: str
+  when: false
+  default: |-
+    - Thanks to Redzy7 for his post on Starfield's design style for the thumbnail (https://www.reddit.com/r/Starfield/comments/15row6b/im_in_love_the_starfield_design_style_so_here_are/)
+    - Thanks to the Starfield's fonts authors
+
+voice_tools:
+  type: str
+  when: false
+  default: |- 
+    - WWise
+    - FooBar2000
+
+ai_voice_tools:
+  type: str
+  when: false
+  default: |- 
+    - xVaSynth
+    - Audacity
+
+fomod_tools:
+  type: str
+  when: false
+  default: "{{ '- Fomod Creation Kit' if fomod else '' }}"
+
+gpt_tool:
+  type: str
+  when: false
+  default: "{{ '- ChatGPT as a help for naming things, writing quests logs, this mod page, etc...' if gpt else '' }}"
+
+#Tasks
+_tasks:
+  - git init
+  - git submodule add --name CIScripts https://github.com/ZeCroque/BGSModPackagingScripts.git CIScripts
+  - py -3 setup.py {{game}}
+  - del /f setup.py

@@ -1,0 +1,11 @@
+Scriptname {{project_shortname}}{{papyrus_namespace_separator}}UpdateQuest{{papyrus_namespace_separator}}UpdateQuestScript extends Quest
+
+GlobalVariable Property {{project_shortname}}_ModVersion {{ 'Mandatory Const' if game != 'Skyrim' }} Auto
+
+Event OnInit()
+    Update()
+EndEvent
+
+Function Update()
+    {{project_shortname}}_ModVersion.SetValue({{project_shortname}}{{papyrus_namespace_separator}}Utility{{papyrus_namespace_separator}}ModInfo.GetModVersion())
+EndFunction
