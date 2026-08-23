@@ -27,6 +27,14 @@ my_games_path:
     type: str
     help: What is the path of the "My Games" folder?
 
+mo2_path:
+  type: str
+  help: What is the path of the MO2 folder?
+
+mo2_instance_name:
+  type: str
+  help: What is the name of the MO2 instance?
+
 notebook_path:
     type: str
     help: What is the path of the notebook holding project design infos?
