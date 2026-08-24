@@ -96,6 +96,15 @@ def main():
                     print("CONFIGURATION ERROR")
             with open(mo2ProfilePath + "settings.ini", "a") as file:
                 file.write("[custom_overwrites]\nxTranslator=" + junctionName + "\nCreation%20Kit=" + junctionName + "\n" + xEditName + "=" + junctionName)
+    
+    if len(sys.argv) > 3:
+        notebookPath = sys.argv[3] + "/" + mod_info.config.game + "/" + mod_info.config.modName + "/"
+        if not os.path.isdir(notebookPath):
+            os.makedirs(notebookPath)  
+            with open(notebookPath + "todo.md", "w") as file:
+                file.write("#TODO")
+            with open(notebookPath + "notes.md", "w") as file:
+                file.write("") 
 
 if __name__ == "__main__":
     main()
