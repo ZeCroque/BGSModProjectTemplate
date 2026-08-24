@@ -31,6 +31,10 @@ mo2_path:
   type: str
   help: What is the path of the MO2 folder?
 
+mo2_instances_root:
+  type: str
+  help: What is the path of the MO2 instances root folder?
+
 mo2_instance_name:
   type: str
   help: What is the name of the MO2 instance?
@@ -252,5 +256,5 @@ gpt_tool:
 _tasks:
   - git init
   - git submodule add --name CIScripts https://github.com/ZeCroque/BGSModPackagingScripts.git CIScripts
-  - py -3 setup.py {{game}}
+  - py -3 setup.py {{game}} {{mo2_instances_root}} {{notebook_path}}
   - del /f setup.py
