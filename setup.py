@@ -106,5 +106,15 @@ def main():
             with open(notebookPath + "notes.md", "w") as file:
                 file.write("") 
 
+    if len(sys.argv) > 4:
+        if sys.argv[4] == "True":
+            voicesBasePath = "./Data/Sound/Voice/"
+            voicesPath = voicesBasePath + mod_info.config.modName + ".esp"
+
+            if mod_info.config.game == utils.Game.STARFIELD:
+                os.makedirs(voicesPath)
+                junction = voicesBasePath + mod_info.config.modName + ".esm"
+                subprocess.run(f'mklink /J "{junction}" "{voicesPath}"', shell=True)
+
 if __name__ == "__main__":
     main()
