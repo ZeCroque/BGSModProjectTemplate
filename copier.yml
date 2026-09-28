@@ -203,7 +203,7 @@ unwanted_vscode_extension:
       "unwantedRecommendations": 
           [
             "joelday.papyrus-lang-vscode",
-            'MrTrilB.papyrus-tools'
+            "MrTrilB.papyrus-tools"
           ]
       {%- else -%}
       "unwantedRecommendations": 
