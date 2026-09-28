@@ -11,7 +11,17 @@
             [
                 {{debug_compile_args}}
             ],
-            "problemMatcher": [],
+            "problemMatcher": {
+                "owner": "external",
+                "fileLocation": "absolute",
+                "pattern": {
+                  "regexp": "^(.*)\\((\\d+),(\\d+)\\):(.*)",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "message": 4,
+                }
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -25,7 +35,17 @@
             [
                 {{release_compile_args}}
             ],
-            "problemMatcher": [],
+            "problemMatcher": {
+                "owner": "external",
+                "fileLocation": "absolute",
+                "pattern": {
+                  "regexp": "^(.*)\\((\\d+),(\\d+)\\):(.*)",
+                  "file": 1,
+                  "line": 2,
+                  "column": 3,
+                  "message": 4,
+                }
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -41,6 +61,29 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        {
+            "label": "Format readme",
+            "type": "process",
+            "command": "py",
+            "args": ["-3", "./CIScripts/readme_formatter.py"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Add Strings to achlist",
+            "type": "process",
+            "command": "py",
+            "args": ["-3", "./CIScripts/achlist.py"],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
+        {{extra_tasks}}
     ]
 }

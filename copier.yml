@@ -223,6 +223,24 @@ archive_extension:
       ba2
       {%- endif -%}
 
+extra_tasks:
+  type: str
+  when: false
+  default: >-
+      {%- if game == "Skyrim" -%}
+      ,{
+        "label": "Generate SEQ",
+        "type": "process",
+        "command": "py",
+        "args": ["-3", "./CIScripts/seq.py"],
+        "problemMatcher": [],
+        "group": {
+            "kind": "build",
+            "isDefault": true
+        }
+      }
+      {%- endif -%}
+
 # Readme
 ai_voices_manual_install:
   type: str
