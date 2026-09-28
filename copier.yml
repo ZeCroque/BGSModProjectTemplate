@@ -43,6 +43,22 @@ notebook_path:
     type: str
     help: What is the path of the notebook holding project design infos?
 
+discord:
+  type: str
+  help: What is the invitation link for your Discord?
+
+website:
+  type: str
+  help: What is the URL of your website/linktree?
+
+mod_size:
+  type: str
+  help: What size will the mod be?
+  choices:
+    - Small
+    - Mid
+    - Full
+
 voices:
   type: bool
   help: Will the mod contain voices?

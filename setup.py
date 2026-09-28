@@ -6,6 +6,7 @@ from pathlib import Path
 from CIScripts import mod_info
 from CIScripts import utils
 from CIScripts import papyrus_compiler
+from CIScripts import readme_formatter
 
 def StarfieldSetup():
     shutil.move("Data/Starfield.esp", "Data/" + mod_info.config.modName + ".esp")
@@ -58,6 +59,9 @@ def main():
         patchedFile = patchedFile.replace(b"\0ZEC:", b"\0" + mod_info.config.modShortName.encode() + b":")
     with open("./Data/" + mod_info.config.modName + ".esp", "wb") as file:
         file.write(patchedFile)
+
+    #Generate readme
+    readme_formatter.FormatReadmeFile("./")
 
     #Setup MO2
     if len(sys.argv) > 2:
