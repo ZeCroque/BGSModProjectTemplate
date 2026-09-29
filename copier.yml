@@ -54,10 +54,16 @@ website:
 mod_size:
   type: str
   help: What size will the mod be?
-  choices:
+  choices: |
+    {%- if game == "Starfield" -%}
     - Small
     - Mid
     - Full
+    {%- else -%}
+    - Small
+    - Full
+    {%- endif -%}
+
 
 voices:
   type: bool
