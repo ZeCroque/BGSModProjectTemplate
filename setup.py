@@ -14,6 +14,11 @@ def StarfieldSetup():
     os.remove("Data/Skyrim.esp")
     shutil.rmtree("Data/SEQ/")
     shutil.move("Data/Scripts/" + mod_info.config.modShortName + "/", "Data/Scripts/Source/" + mod_info.config.modShortName + "/")
+    
+    # Create junction to the script folder for the official VSCode papyrus extension 
+    scriptsPath = "./Data/Scripts/Source/" + mod_info.config.modShortName
+    junction  = mod_info.config.gamePath + "/Data/Scripts/Source/" + mod_info.config.modShortName
+    subprocess.run(f'mklink /J "{junction}" "{scriptsPath}"', shell=True)
 
 def Fallout4Setup():
     shutil.move("Data/Fallout4.esp", "Data/" + mod_info.config.modName + ".esp")
@@ -119,6 +124,11 @@ def main():
                 os.makedirs(voicesPath)
                 junction = voicesBasePath + mod_info.config.modName + ".esm"
                 subprocess.run(f'mklink /J "{junction}" "{voicesPath}"', shell=True)
+            else:  
+                os.makedirs(voicesPath)
+                if mod_info.config.modSize == utils.ModSize.SMALL:
+                    junction = voicesBasePath + mod_info.config.modName + ".esl"
+                    subprocess.run(f'mklink /J "{junction}" "{voicesPath}"', shell=True)
 
 if __name__ == "__main__":
     main()
