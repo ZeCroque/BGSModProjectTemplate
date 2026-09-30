@@ -67,6 +67,7 @@ def main():
 
     #Generate readme
     readme_formatter.FormatReadmeFile("./")
+    readme_formatter.UpdateRepositoryReadme("./")
 
     #Setup MO2
     if len(sys.argv) > 2:
