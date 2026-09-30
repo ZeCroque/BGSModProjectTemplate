@@ -130,5 +130,13 @@ def main():
                     junction = voicesBasePath + mod_info.config.modName + ".esl"
                     subprocess.run(f'mklink /J "{junction}" "{voicesPath}"', shell=True)
 
+            with open("./Data/" + mod_info.config.modShortName + "_Voices.achlist" , "w") as file:
+                file.write("[\n]") 
+  
+    if len(sys.argv) > 5:
+        if sys.argv[5] == "True":
+            with open("./Data/" + mod_info.config.modShortName + "_ModdedVoices.achlist" , "w") as file:
+                file.write("[\n]") 
+
 if __name__ == "__main__":
     main()

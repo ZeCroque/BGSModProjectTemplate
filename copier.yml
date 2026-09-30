@@ -296,5 +296,5 @@ gpt_tool:
 _tasks:
   - git init
   - git submodule add --name CIScripts https://github.com/ZeCroque/BGSModPackagingScripts.git CIScripts
-  - py -3 setup.py {{game}} {{mo2_instances_root}} {{notebook_path}} {{voices}}
+  - py -3 setup.py {{game}} {{mo2_instances_root}} {{notebook_path}} {{voices}} {{ai_voices}}
   - del /f setup.py
