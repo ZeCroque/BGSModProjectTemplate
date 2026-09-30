@@ -301,3 +301,4 @@ _tasks:
 
 _migrations:
   - git submodule update --remote CIScripts
+  - py -3 CIScripts/readme_formatter.py
