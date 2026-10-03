@@ -41,7 +41,7 @@ def SkyrimSetup():
     os.remove("Data/Starfield.esp")
     os.remove("Data/Fallout4.esp")
     shutil.move("Data/Scripts/" + mod_info.config.modShortName + "/", "Data/Source/Scripts/" + mod_info.config.modShortName + "/")
-    os.remove(mod_info.config.modName + "Debug.ppj")
+    shutil.move(mod_info.config.modName + "Debug.ppj", mod_info.config.modName + ".ppj")
     os.remove(mod_info.config.modName + "Release.ppj")
     FlattenNamespaces()
 

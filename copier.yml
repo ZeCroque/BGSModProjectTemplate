@@ -119,6 +119,16 @@ papyrus_user_source_path:
     Source/Scripts
     {%- endif -%}
 
+papyrus_flag:
+  type: str
+  when: false
+  default: >-
+    {%- if game == "Skyrim" -%}
+    {{papyrus_flag_name}}
+    {%- else -%}
+    {{game_path}}\Data\{{papyrus_base_source_path}}\{{papyrus_flag_name}}
+    {%- endif -%}
+
 compiler_path:
   type: str
   when: false
@@ -214,7 +224,7 @@ unwanted_vscode_extension:
       {%- else -%}
       "unwantedRecommendations": 
           [
-            "joelday.papyrus-lang-vscode",
+            "MrTrilB.papyrus-tools",
             "zenimax.vscodepapyrus"
           ]
       {%- endif -%}
