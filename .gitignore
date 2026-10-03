@@ -1,6 +1,7 @@
 *.ignore.*
 *.pex
 *.wem
+*.fuz
 *.seq
 !Data/SEQ/{{project_name}}.seq
 *.esm
