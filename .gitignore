@@ -14,8 +14,8 @@
 *.dlstrings
 *.strings
 __pycache__
-SF1Edit Backups
-SF1Edit Cache
+*Edit Backups
+*Edit Cache
 build
 output
 meta.ini
@@ -24,3 +24,4 @@ Release
 ModInfo.psc
 info.xml
 po3_StartOnSave.ini
+debug
